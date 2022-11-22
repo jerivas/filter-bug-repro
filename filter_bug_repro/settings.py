@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
+import django_stubs_ext
+from rest_framework import viewsets
+
+django_stubs_ext.monkeypatch(extra_classes=(viewsets.ModelViewSet,))
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +30,7 @@ SECRET_KEY = "django-insecure-y8wb*0dmde$@0r_^e3i+fryn1-lvqhycq72bm2$+(v+-p1dwms
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS: list[str] = []
 
 
 # Application definition

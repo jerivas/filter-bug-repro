@@ -24,23 +24,23 @@ class Document(models.Model):
     name = models.CharField(max_length=255)
     owner = models.ForeignKey("auth.User", on_delete=models.CASCADE)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
 
-class DocumentFilterSet(filters.FilterSet):
+class DocumentFilterSet(filters.FilterSet):  # type: ignore
     class Meta:
         model = Document
         fields = ("owner",)
 
 
-class DocumentSerializer(serializers.ModelSerializer):
+class DocumentSerializer(serializers.ModelSerializer[Document]):
     class Meta:
         model = Document
         fields = ("id", "name", "owner")
 
 
-class DocumentViewSet(viewsets.ModelViewSet):
+class DocumentViewSet(viewsets.ModelViewSet[Document]):
     queryset = Document.objects.all()
     serializer_class = DocumentSerializer
     filterset_class = DocumentFilterSet
